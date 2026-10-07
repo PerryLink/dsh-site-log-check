@@ -1,0 +1,19 @@
+target: 某住宅楼工程 监理日志与旁站记录
+project:
+  name: 某住宅楼工程
+  serviceStart: "2026-03-01"
+  serviceEnd: "2026-03-05"
+keyWorks:
+  - name: 土方回填
+    contractor: 某基础工程公司
+  - name: 预应力张拉
+    contractor: 某建筑公司
+onsite:
+  - id: PZ-0001
+    keyWork: 土方回填
+    contractor: 某基础工程公司
+    startedAt: "2026-03-02 08:00"
+    endedAt: "2026-03-02 12:00"
+    issues: 未发现问题；压实度经检测符合要求
+    supervisorSignature: 张监理
+    contractorSignature: 李质检

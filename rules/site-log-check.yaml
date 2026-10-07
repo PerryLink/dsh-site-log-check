@@ -1,0 +1,312 @@
+# 监理日志连续性与旁站覆盖 规则库
+#
+# 规则数据与代码分离：替换本文件即可切换规则集版本，无需改动 TypeScript。
+#
+# 条款引用纪律（由 shared/ruleset.ts 强制校验）：
+#   - 每条规则必须写全 document / number / clause / excerpt / kind / source，
+#     且 excerpt 必须是逐字摘录，不得改写。
+#   - kind: direct                       条款直接规定了所检查的要求
+#   - kind: derived-from-principle       条款未直接规定，仅能由原则性条款推论（severity 最多 warn）
+#   - kind: institutional-configuration  阈值出自地方标准或本机构规定而非国家标准（severity 最多 info）
+#
+# ⚠️⚠️ 效力层级（2026-10-07 补记，**决定严重级**）：
+#   **本规范是推荐性国家标准。** 住房和城乡建设部**公告第 35 号**（2013-05-13）逐字：
+#   「现批准《建设工程监理规范》为**国家标准，编号为 GB/T 50319-2013**，自 2014 年 3 月 1 日起实施。
+#   原国家标准《建设工程监理规范》**GB 50319-2000 同时废止**。」
+#   标准号带 **"/T" ⇒ 推荐性**；**前言未声明任何章为强制性**
+#   （对比 GB 26860—2011 前言明写「第5章和7.3.4为推荐性，其余为强制性」——**本规范没有这类声明**）。
+#   ⇒ **本规则库没有任何 error 级规则**：条文里的「应」是工程建设标准的起草惯例，**不等于法律强制**。
+#   原先 12 条 error 已全部降为 warn（见 rules/evidence/clause-verification.md 本轮的效力一节）。
+#   ⚠️ 这不表示这些要求不重要 —— **义务本身确实存在，而且在法律层面**：
+#      ✅ **《建设工程质量管理条例》（国务院令第279号，2019 年二次修订）第三十八条逐字**：
+#        「监理工程师应当按照**工程监理规范**的要求，采取**旁站、巡视和平行检验**等形式，
+#        对建设工程实施监理。」⇒ **"采取旁站形式"是行政法规的强制要求**（A 类，有强制力）。
+#      ⚠️ **但第三十八条没有规定"旁站记录应当有哪些栏"** —— 栏位要求出自
+#        **GB/T 50319 表 A.0.6**（C 类，推荐性）；`SL-008` 已把第三十八条列为 `alsoBasis`。
+#      ⇒ **准确的表述是：义务在条例（A 类），做法在推荐性标准（C 类）** ——
+#        本插件核对的是"为履行法定义务所应有的记录"，而**记录的具体形式要求是推荐性的**，
+#        因而不阻断流程。见 rules/evidence/clause-verification-qa-regulation.md。
+#      ⚠️ **不要把《条例》第三十七条引来支撑 `SL-011`**：该条讲的是材料、构配件、设备使用
+#        与下一道工序施工的**签字前置**，**不是旁站记录的签署要求**，引之即张冠李戴。
+
+# 三条容易搞错的边界（已在核验中确认，务必保留）：
+#   1. 「监理日志每日签字、总监签阅」**不是** GB/T 50319-2013 正文要求，出自山东省 DB37/T 5009。
+#   2. 「页次、日期应连续」**不是** GB/T 50319-2013 正文要求，出自福建省 DBJT 13-144-2019。
+#      ⚠️ **本轮已按全文逐字核对改写**：GB/T 50319-2013 对监理日志的要求**不止 2.0.21 一条** ——
+#      第 2.0.21 条定义（"每日"）、**第 7.2.2 条逐项列举日志应含的五项内容**（天气与施工环境、
+#      当日施工进展、当日监理工作、当日存在问题及协调解决、其他）、**第 3.2.3 条第 10 项**
+#      规定"专业监理工程师……组织编写监理日志"、第 7.1.2 条要求"及时、准确、**完整**"地收集整理、
+#      第 7.3.1 条要求"及时整理、分类汇总……按规定组卷"。
+#      ⇒ 连续性检查（SL-002）**仍保持 info，但理由要改**：不是"规范没规定"，
+#      而是**规范要求完整与及时，却未规定"缺哪一天"如何判定**，而日志是否应覆盖某一天取决于施工期，
+#      台账里未必有施工期。见 rules/evidence/clause-verification.md。
+#   3. 「旁站记录双方签字」出自建市〔2002〕189号第七条；GB/T 50319-2013 表 A.0.6 只有
+#      「旁站监理人员（签字）」一个签字栏，施工企业质检人员签字不得归给 50319。
+#
+# 条款号写法：层级为「章(1~9) → 节(x.x) → 条(x.x.x)」，应写「第7.2.2条」，不要写「第7.2.2款」。
+
+plugin: dsh-site-log-check
+version: "2026.1"
+
+rules:
+  - id: SL-001
+    title: 监理日志应按日历日记录且不重复
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 第2.0.21条
+      excerpt: 项目监理机构每日对建设工程监理工作及施工进展情况所做的记录。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    params:
+      maxPerDay: 1
+    note: >-
+      本条只核对同一日历日是否出现重复日志，以及日志日期是否落在监理服务期内。
+      注意：这是 GB/T 50319-2013 正文中唯一对监理日志施加「每日」约束的条文。
+
+  - id: SL-002
+    title: 施工期内的监理日志不应缺日
+    severity: info
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 第2.0.21条
+      excerpt: 项目监理机构每日对建设工程监理工作及施工进展情况所做的记录。
+      kind: derived-from-principle
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    alsoBasis:
+      - document: 福建省《建设工程监理文件资料管理标准》
+        number: DBJT 13-144-2019
+        clause: 7.1.1
+        excerpt: 项目监理机构应如实记录监理日志，及时装订成册，页次、日期应连续。
+        kind: direct
+        source: https://zjt.fujian.gov.cn/
+    params:
+      minCoverageRatio: 0.9
+      ignoreWeekends: false
+    note: >-
+      GB/T 50319-2013 正文只有「每日」二字，没有「不得缺日」「页次日期应连续」的表述；
+      「日期应连续」的明文出自福建省 DBJT 13-144-2019（地方标准），故本条严重级封顶为 info。
+      缺日仍逐日列出，供人工核实是否因停工、节假日或日志未归档。
+
+  - id: SL-003
+    title: 监理日志应记录天气和施工环境情况
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 第7.2.2条
+      excerpt: 监理日志应包括下列主要内容：1 天气和施工环境情况。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    params:
+      field: weather
+    note: 逐字核对时确认第 7.2.2 条为「应包括下列主要内容」加 1~5 款，本条对应第 1 款。
+
+  - id: SL-004
+    title: 监理日志应记录当日施工进展情况
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 第7.2.2条
+      excerpt: 2 当日施工进展情况。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    params:
+      field: progress
+
+  - id: SL-005
+    title: 监理日志应记录当日监理工作情况
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 第7.2.2条
+      excerpt: 3 当日监理工作情况，包括旁站、巡视、见证取样、平行检验等情况。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    params:
+      field: supervision
+
+  - id: SL-006
+    title: 监理日志应记录当日存在的问题及处理情况
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 第7.2.2条
+      excerpt: 4 当日存在的问题及协调解决情况。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    params:
+      field: issues
+    note: >-
+      ⚠️ **两个来源对第 4 款措辞不一致，本条已按"未核实"处理**（见 rules/evidence/clause-verification.md）：
+      · **本插件原先采用的读法**：「4 当日存在的问题**及处理情况**」——
+        note 曾声称"已放大官方扫描件确认"，并称另一读法为讹误；
+      · **本次实际读到的完整转载本**（广东省建东工程监理有限公司，2026-10-07 逐字读取）：
+        「4 当日存在的问题**及协调解决情况**」——**官方 PDF 地址（download.mohurd.gov.cn）
+        在本次环境中无法取文本**（抓取工具不支持 `application/pdf`）。
+      ⇒ **本次核查无法核对官方扫描件**，故**不能断定哪一读法是讹误**。
+      本条只核对"这一栏是否填写"，**措辞差异不影响检查行为**，
+      但 **`excerpt` 必须与实际读到的文本一致**，故已改为与转载本一致，
+      并在此如实记录两读法并存、官方件未能复核这一事实。
+      **不要把本条 note 读成"另一个读法是错的"** —— 那是一句没有证据的断言。
+
+  - id: SL-007
+    title: 监理日志应由专业监理工程师组织编写并留下记录人
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 第3.2.3条
+      excerpt: 10 组织编写监理日志，参与编写监理月报。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    params:
+      field: recorder
+    note: >-
+      第 3.2.3 条为专业监理工程师职责。规范正文未规定「每日签字」，也未给出监理日志表式；
+      规范第 3.2.4 条监理员职责五项中不含监理日志（「做好监理日记」属已废止的 GB 50319-2000 旧版表述）。
+      本条只核对材料是否留下记录人，不要求签字日期。
+
+  - id: SL-008
+    title: 旁站的关键部位、关键工序应有确定的旁站清单
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 第5.2.11条
+      excerpt: 项目监理机构应根据工程特点和施工单位报送的施工组织设计，确定旁站的关键部位、关键工序，安排监理人员进行旁站，并应及时记录旁站情况。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    alsoBasis:
+      - document: 《建设工程质量管理条例》
+        number: 国务院令第279号
+        clause: 第三十八条
+        excerpt: 监理工程师应当按照工程监理规范的要求，采取旁站、巡视和平行检验等形式，对建设工程实施监理。
+        kind: direct
+        source: https://www.gov.cn/gongbao/content/2019/content_5468867.htm
+    note: >-
+      GB/T 50319-2013 正文未列举关键部位、关键工序清单；清单来源是建市〔2002〕189号第二条。
+      材料未声明本工程旁站清单时，本条不报差异，而是在 skipped 中说明缺清单。
+
+  - id: SL-009
+    title: 已实施的旁站记录应有开始与结束时间
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 表A.0.6
+      excerpt: 旁站开始时间 年 月 日 时 分；旁站结束时间 年 月 日 时 分。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    params:
+      requireEndTime: true
+    note: 表 A.0.6 为规范附录 A 的表式，经第 5.2.11 条「旁站记录应按本规范表A.0.6的要求填写」产生约束力。
+
+  - id: SL-010
+    title: 旁站记录应记录发现的问题及处理情况
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 表A.0.6
+      excerpt: 发现的问题及处理情况：
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    params:
+      field: issues
+
+  - id: SL-011
+    title: 旁站记录应有旁站监理人员签字
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 表A.0.6
+      excerpt: 旁站监理人员（签字）。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    alsoBasis:
+      - document: 《房屋建筑工程施工旁站监理管理办法（试行）》
+        number: 建市〔2002〕189号
+        clause: 第七条
+        excerpt: 凡旁站监理人员和施工企业现场质检人员未在旁站监理记录（见附件）上签字的，不得进行下一道工序施工。
+        kind: direct
+        source: http://www.njzsb.cn//zcfg/bmjdfgz/202408/t20240829_4752263.html
+    params:
+      requireContractorSignature: true
+    note: >-
+      表 A.0.6 只有「旁站监理人员（签字）」一个签字栏，双方签字要求出自建市〔2002〕189号第七条；
+      两条依据分别标注，不得把施工企业质检人员签字归给 GB/T 50319-2013。
+
+  - id: SL-012
+    title: 需旁站的关键部位、关键工序应有对应旁站记录
+    severity: warn
+    basis:
+      document: 《房屋建筑工程施工旁站监理管理办法（试行）》
+      number: 建市〔2002〕189号
+      clause: 第二条
+      excerpt: 本办法所规定的房屋建筑工程的关键部位、关键工序，在基础工程方面包括：土方回填，混凝土灌注桩浇筑，地下连续墙、土钉墙、后浇带及其他结构混凝土、防水混凝土浇筑，卷材防水层细部构造处理，钢结构安装。
+      kind: direct
+      source: http://www.njzsb.cn//zcfg/bmjdfgz/202408/t20240829_4752263.html
+    alsoBasis:
+      - document: 《房屋建筑工程施工旁站监理管理办法（试行）》
+        number: 建市〔2002〕189号
+        clause: 第九条
+        excerpt: 对于需要旁站监理的关键部位、关键工序施工，凡没有实施旁站监理或者没有旁站监理记录的，监理工程师或者总监理工程师不得在相应文件上签字。
+        kind: direct
+        source: http://www.njzsb.cn//zcfg/bmjdfgz/202408/t20240829_4752263.html
+    params:
+      keyWorks:
+        - 土方回填
+        - 混凝土灌注桩浇筑
+        - 地下连续墙
+        - 土钉墙
+        - 后浇带
+        - 防水混凝土浇筑
+        - 卷材防水层细部构造处理
+        - 钢结构安装
+        - 梁柱节点钢筋隐蔽
+        - 混凝土浇筑
+        - 预应力张拉
+        - 装配式结构安装
+        - 网架结构安装
+        - 索膜安装
+    note: >-
+      清单逐字取自建市〔2002〕189号第二条，仅适用于房屋建筑工程；其他专业工程按该办法第十二条
+      「可以参照本办法实施」。清单可在本机构规则库中增删，改文件不需改代码。
+
+  - id: SL-013
+    title: 监理日志中的旁站情况应与旁站记录台账对应
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 第7.2.2条
+      excerpt: 3 当日监理工作情况，包括旁站、巡视、见证取样、平行检验等情况。
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    note: >-
+      本条只核对日志声明的旁站情况与旁站记录台账是否对得上，不要求两者编号互链
+      （GB/T 50319-2013 与建市〔2002〕189号 均无编号互链要求）。
+
+  - id: SL-014
+    title: 旁站记录应写明旁站的关键部位、关键工序与施工单位
+    severity: warn
+    basis:
+      document: 《建设工程监理规范》
+      number: GB/T 50319-2013
+      clause: 表A.0.6
+      excerpt: 旁站的关键部位、关键工序 ｜ 施工单位
+      kind: direct
+      source: https://www.dengzhou.gov.cn/2024/09-05/1180935.html
+    params:
+      fields:
+        - keyWork
+        - contractor
+
+disabled: []

@@ -1,0 +1,21 @@
+{
+  "ruleId": "SL-013",
+  "pairs": [
+    {
+      "name": "expected-state",
+      "material": "SL-013-compliant.yaml",
+      "expect": {
+        "ruleId": "SL-013",
+        "count": 0
+      }
+    },
+    {
+      "name": "difference-present",
+      "material": "SL-013-unsafe.yaml",
+      "expect": {
+        "ruleId": "SL-013",
+        "count": 1
+      }
+    }
+  ]
+}

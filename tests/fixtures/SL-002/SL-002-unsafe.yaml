@@ -1,0 +1,20 @@
+target: 某住宅楼工程 监理日志与旁站记录
+project:
+  name: 某住宅楼工程
+  serviceStart: "2026-03-01"
+  serviceEnd: "2026-03-05"
+logs:
+  - date: "2026-03-01"
+    id: LOG-20260301
+    weather: 晴，气温 12~21℃，风力 3 级，具备施工条件
+    progress: 三层顶板钢筋绑扎完成 80%，模板支设完成
+    supervision: 巡视 2 次；见证取样 1 组
+    issues: 个别箍筋间距偏大，已要求班组整改并复查
+    recorder: 张监理
+  - date: "2026-03-05"
+    id: LOG-20260305
+    weather: 晴，气温 12~21℃，风力 3 级，具备施工条件
+    progress: 三层顶板钢筋绑扎完成 80%，模板支设完成
+    supervision: 巡视 2 次；见证取样 1 组
+    issues: 个别箍筋间距偏大，已要求班组整改并复查
+    recorder: 张监理
