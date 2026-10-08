@@ -54,8 +54,7 @@ versioned rule pack, and returns a report whose every finding names the clause i
 ## Install
 
 ```sh
-pnpm pack
-dsh plugin --profile <name> add ./dsh-site-log-check-0.1.0.tgz
+dsh plugin --profile <name> add dsh-site-log-check
 dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
 ```
 

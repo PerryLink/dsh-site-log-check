@@ -2,4 +2,9 @@
 
 ## 0.1.0
 
-- Initial release — 监理日志跨日连续性与旁站覆盖提示（依据 GB/T 50319-2013 等公开文件，仅提示差异，不作出定性结论）
+- Release infrastructure brought to the family standard: `verify:self-contained`,
+  `check:lockfile` and `check:readmes` gates, a `prepublishOnly` that re-runs the whole chain,
+  SECURITY.md, dependabot, and the OpenSSF Scorecard workflow.
+- The README install command now names the published package instead of a local tarball.
+- Rule pack: 14 rules across SL-001..SL-014.
+- Licensed Apache-2.0.

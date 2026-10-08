@@ -23,8 +23,7 @@ reports literal mismatches against cited clauses.
 ## Install
 
 ```sh
-pnpm pack
-dsh plugin --profile <name> add ./*.tgz
+dsh plugin --profile <name> add dsh-site-log-check
 dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
 ```
 
