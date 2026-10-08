@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.1
+
+- Citation pass: every `excerpt` was checked against this repository's own
+  `rules/evidence/` record, and the record was completed for the clauses the
+  rules quote.
+- SL-012 moved from a trade body page to the Shanghai housing authority PDF, and its 第二条第二款 and 第九条 are now on record.
+- Adds `rules/citations-baseline.json`, which the `check:citations` gate reads:
+  it lists any excerpt not yet traceable to the evidence, and that list can
+  only shrink.
 ## 0.2.0
 
 - Release infrastructure brought to the family standard: `verify:self-contained`,
