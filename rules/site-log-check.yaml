@@ -236,7 +236,7 @@ rules:
         clause: 第七条
         excerpt: 凡旁站监理人员和施工企业现场质检人员未在旁站监理记录（见附件）上签字的，不得进行下一道工序施工。
         kind: direct
-        source: http://www.njzsb.cn//zcfg/bmjdfgz/202408/t20240829_4752263.html
+        source: https://zjw.sh.gov.cn/cmsres/99/994c3d09e6084ba4bdc7949be14357d2/6ab700d1c69cf5e7bf15b881b9398ce4.pdf
     params:
       requireContractorSignature: true
     note: >-
@@ -252,14 +252,14 @@ rules:
       clause: 第二条
       excerpt: 本办法所规定的房屋建筑工程的关键部位、关键工序，在基础工程方面包括：土方回填，混凝土灌注桩浇筑，地下连续墙、土钉墙、后浇带及其他结构混凝土、防水混凝土浇筑，卷材防水层细部构造处理，钢结构安装。
       kind: direct
-      source: http://www.njzsb.cn//zcfg/bmjdfgz/202408/t20240829_4752263.html
+      source: https://zjw.sh.gov.cn/cmsres/99/994c3d09e6084ba4bdc7949be14357d2/6ab700d1c69cf5e7bf15b881b9398ce4.pdf
     alsoBasis:
       - document: 《房屋建筑工程施工旁站监理管理办法（试行）》
         number: 建市〔2002〕189号
         clause: 第九条
         excerpt: 对于需要旁站监理的关键部位、关键工序施工，凡没有实施旁站监理或者没有旁站监理记录的，监理工程师或者总监理工程师不得在相应文件上签字。
         kind: direct
-        source: http://www.njzsb.cn//zcfg/bmjdfgz/202408/t20240829_4752263.html
+        source: https://zjw.sh.gov.cn/cmsres/99/994c3d09e6084ba4bdc7949be14357d2/6ab700d1c69cf5e7bf15b881b9398ce4.pdf
     params:
       keyWorks:
         - 土方回填
