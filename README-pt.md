@@ -1,4 +1,26 @@
-# dsh-site-log-check
+# dsh-site-log-check — Continuidade do registo diário de fiscalização de obra e cobertura dos registos de fiscalização no local
+
+`dsh-site-log-check` lê o arquivo de fiscalização de uma obra —o período de serviço de fiscalização, os registos diários de fiscalização, a lista declarada de partes e processos-chave que exigem fiscalização no local e os próprios registos de fiscalização no local— e confronta-o com as cláusulas citadas pelo seu pacote de regras: se um mesmo dia de calendário tem mais de um registo ou um registo com data fora do período de serviço, que dias do período não têm registo, se cada registo preenche as suas colunas e indica quem o elaborou, se a lista declarada de partes e processos-chave existe e cada uma delas tem registo de fiscalização no local, se o registo de fiscalização no local traz hora de início e de fim por ordem, a parte e o processo-chave, a empresa construtora, o que foi encontrado e as assinaturas, e se a fiscalização no local declarada num registo diário tem registo na mesma data. Tudo o que reporta são diferenças literais, cada uma com a cláusula de onde vem, para revisão por uma pessoa.
+
+## O que ele responde
+
+| Você pergunta | O que ele responde |
+|---|---|
+| Dois registos diários trazem a mesma data de calendário — isso é reportado? | Sim. `SL-001` aplica `params.maxPerDay` (1) e assinala cada dia de calendário com mais de um registo; assinala também o registo cuja data fica fora do período de serviço obtido de `project.serviceStart` e `project.serviceEnd`. Compara datas e contagens; não decide qual dos dois lançamentos é o do dia nem se um lançamento acrescentado depois se justificava. Se nenhuma data do material for legível, a regra reporta que não pôde ser executada em vez de passar em silêncio. |
+| Faltam três dias de registo a meio do período de serviço. O que faz a verificação? | `SL-002` conta os dias de calendário entre `project.serviceStart` e `project.serviceEnd` sem registo. É a única regra `info` do pacote: a exigência de datas consecutivas consta da norma provincial de Fujian DBJT 13-144-2019, não da GB/T 50319-2013, por isso avisa e nunca bloqueia. Abaixo de `params.minCoverageRatio` (0.9) lista cada dia em falta como diferença; nesse valor ou acima reporta que não pôde ser executada e nomeia aí os dias em falta. Se a falha foi uma paragem, um feriado ou um registo não arquivado, decide uma pessoa. |
+| O registo de um dia deixa vazia a coluna dos problemas. | `SL-006` assinala esse lançamento: todos os registos diários devem preencher a coluna dos problemas do dia e da forma como foram resolvidos. Verifica que a coluna está preenchida, não que o texto está certo, pelo que uma anotação a dizer que nada foi encontrado passa e uma célula vazia não. O pacote regista que as duas leituras disponíveis do 第7.2.2条第4款 divergem na redação e que o documento oficial digitalizado não pôde ser relido, pelo que a regra abstém-se de propósito de julgar a redação e olha apenas para o preenchimento da coluna. |
+| Nada no material declara que partes e processos-chave exigem fiscalização no local. Passa em silêncio? | Não. Quando o material mostra que houve fiscalização no local —existe um registo de fiscalização no local, ou a coluna do trabalho de fiscalização de algum registo diário menciona 旁站—, `SL-008` reporta a falta da lista declarada. Quando nada aponta para fiscalização no local, a regra reporta que não pôde ser executada com esse motivo, em vez de inventar uma exigência que a obra pode não ter. O pacote nota que o texto da GB/T 50319-2013 não enumera essas partes e processos, e que a lista vem do 建市〔2002〕189号第二条. |
+| O nosso registo de fiscalização no local só tem a assinatura do fiscal. Isso é reportado? | Sim. Com `params.requireContractorSignature` ligado, `SL-011` assinala tanto a falta de assinatura do 旁站监理人员 como a do 施工企业现场质检人员. O pacote separa de propósito as duas bases: a 表 A.0.6 tem apenas a caixa 旁站监理人员（签字）, e a segunda assinatura vem do 建市〔2002〕189号第七条, pelo que não deve ser atribuída à GB/T 50319-2013. A regra verifica que as assinaturas estão registadas, não que sejam autênticas. |
+| Um registo diário diz que houve fiscalização no local a 12 de maio, mas nesse dia o livro de registos não tem nada. | `SL-013` assinala-o: coteja as datas dos registos diários cuja coluna de fiscalização menciona 旁站 com as datas de início dos registos de fiscalização no local. Verifica apenas que ambos coincidem; o pacote afirma que nem a GB/T 50319-2013 nem o 建市〔2002〕189号 exigem que os dois documentos se liguem por número. Se nenhum registo de fiscalização no local tiver hora de início, ou nenhum registo diário declarar fiscalização no local, a regra reporta que não pôde ser executada em vez de passar em silêncio. |
+
+## Normas que segue
+
+| Documento | Número | Regras que o citam |
+|---|---|---|
+| 《建设工程监理规范》 | GB/T 50319-2013 | SL-001, SL-002, SL-003, SL-004, SL-005, SL-006, SL-007, SL-008, SL-009, SL-010, SL-011, SL-013, SL-014 |
+| 福建省《建设工程监理文件资料管理标准》 | DBJT 13-144-2019 | SL-002 |
+| 《建设工程质量管理条例》 | 国务院令第279号 | SL-008 |
+| 《房屋建筑工程施工旁站监理管理办法（试行）》 | 建市〔2002〕189号 | SL-011, SL-012 |
 
 **Boundary:** this plugin checks the **continuity of the daily supervision log and the coverage of
 on-site supervision records** for a construction project — the site-supervision domain (工程监理).

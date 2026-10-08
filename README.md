@@ -1,4 +1,26 @@
-# dsh-site-log-check
+# dsh-site-log-check — Construction supervision log continuity and on-site supervision record coverage check
+
+`dsh-site-log-check` reads one construction project's supervision archive — the supervision service period, the daily supervision logs, the declared list of key works requiring on-site supervision, and the on-site supervision records — and checks that archive against the clauses its rule pack cites: whether one calendar day carries more than one log or a log dated outside the service period, which days of the period have no log, whether each log fills its content items and names a recorder, whether the declared key-work list exists and every declared key work has an on-site record, whether an on-site record carries start and end times in order, its key work, its contractor, what was found and the signatures, and whether on-site supervision claimed in a log is matched by an on-site record on the same date. Every difference it reports is literal and carries the clause it came from, and the report lists those differences for a human to review.
+
+## What it answers
+
+| You ask | What it answers |
+|---|---|
+| Two log entries carry the same calendar date — is that reported? | Yes. `SL-001` applies `params.maxPerDay` (1) and reports every calendar day that carries more than one log; it also reports a log whose date falls outside the service period taken from `project.serviceStart` and `project.serviceEnd`. It compares dates and counts; it does not decide which of the two entries is that day's record, nor whether an entry added later was justified. If no log date in the material can be read, the rule reports itself in `skipped` instead of passing. |
+| Three days in the middle of the service period have no log. What does the check do? | `SL-002` counts the calendar days between `project.serviceStart` and `project.serviceEnd` that have no log. It is the pack's only `info` rule: the requirement that dates run consecutively comes from the Fujian standard DBJT 13-144-2019, not from GB/T 50319-2013, so it flags and never blocks. Below `params.minCoverageRatio` (0.9) it lists each missing day as a finding; at or above that ratio it reports itself in `skipped` and names the missing days there. Whether a gap was a stoppage, a holiday or a log that was never archived is left to a human. |
+| A day's log leaves the problems column empty. | `SL-006` reports that entry: every log must fill the column for the day's problems and how they were handled. It checks that the column is filled, not that the text is right, so an entry saying that nothing was found passes while a blank one does not. The pack records that the two available readings of 第7.2.2条第4款 differ in wording and that the official scan could not be re-read, so the rule deliberately stays silent on the wording and looks only at whether the column is filled. |
+| Nothing in the material declares which key works require on-site supervision. Does that pass silently? | No. When the material shows on-site supervision was in play — an on-site record exists, or a log's supervision column mentions 旁站 — `SL-008` reports the missing declared list. When nothing points to on-site supervision at all, the rule reports itself in `skipped` with that reason instead of inventing a requirement the project may not be subject to. The pack notes that the text of GB/T 50319-2013 does not itself list the key works and that the list comes from 建市〔2002〕189号第二条. |
+| Our on-site record is signed only by the supervision engineer. Is that reported? | Yes. With `params.requireContractorSignature` on, `SL-011` reports both a missing 旁站监理人员 signature and a missing 施工企业现场质检人员 signature. The pack keeps the two bases apart on purpose: 表 A.0.6 carries only the 旁站监理人员（签字） column, and the second signature comes from 建市〔2002〕189号第七条, so it must not be attributed to GB/T 50319-2013. The rule checks that the signatures are recorded; it does not check that they are genuine. |
+| A log says on-site supervision happened on 12 May, but the ledger has no record for that date. | `SL-013` reports it: it matches the dates of logs whose supervision column mentions 旁站 against the dates on which the on-site records start. It checks only that the two line up; the pack states that neither GB/T 50319-2013 nor 建市〔2002〕189号 requires the two documents to cross-reference each other's serial numbers. If no on-site record carries a start time, or no log claims on-site supervision, the rule reports itself in `skipped` instead of passing. |
+
+## Standards it follows
+
+| Document | Number | Cited by rules |
+|---|---|---|
+| 《建设工程监理规范》 | GB/T 50319-2013 | SL-001, SL-002, SL-003, SL-004, SL-005, SL-006, SL-007, SL-008, SL-009, SL-010, SL-011, SL-013, SL-014 |
+| 福建省《建设工程监理文件资料管理标准》 | DBJT 13-144-2019 | SL-002 |
+| 《建设工程质量管理条例》 | 国务院令第279号 | SL-008 |
+| 《房屋建筑工程施工旁站监理管理办法（试行）》 | 建市〔2002〕189号 | SL-011, SL-012 |
 
 **Boundary:** this plugin checks the **continuity of the daily supervision log and the coverage of
 on-site supervision records** for a construction project — the site-supervision domain (工程监理).
