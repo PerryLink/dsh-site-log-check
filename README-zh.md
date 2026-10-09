@@ -1,6 +1,14 @@
 # dsh-site-log-check — 监理日志跨日连续性与旁站覆盖提示
 
+[![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+
 `dsh-site-log-check` 读取一个工程项目的监理资料——监理服务期、逐日监理日志、声明需要旁站的关键部位与关键工序清单、旁站记录——并按本规则库引用的条款逐项核对：同一日历日是否出现两条以上日志、日志日期是否落在监理服务期内、服务期内哪些日子没有日志、每条日志是否填写了各项栏目与记录人、声明的旁站清单是否存在且每项关键部位或关键工序都有对应旁站记录、旁站记录是否填写了起止时间且先后顺序正确、关键部位或关键工序、施工单位、发现的问题及处理情况与签字，以及日志中声明的旁站情况在当日是否有旁站记录对应。报出的都是字面差异，每条差异都带出它依据的条款，供人工复核。
+
+## 实际输出长什么样
+
+![Terminal demo of dsh-site-log-check: real output over its SL-014 fixture](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-demo.png)
+
+本插件对自己 `SL-014` 测试夹具的**真实输出**，不是示意图。规则库不伪造引文，因此每条发现都会同时写明所引条款，以及该条款原文本次未取得。
 
 ## 它回答什么问题
 

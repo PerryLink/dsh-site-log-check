@@ -1,6 +1,14 @@
 # dsh-site-log-check — Continuidad del registro diario de supervisión de obra y cobertura de los registros de supervisión en sitio
 
+[![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+
 `dsh-site-log-check` lee el archivo de supervisión de una obra —el periodo de servicio de supervisión, los registros diarios de supervisión, la lista declarada de partes y procesos clave que requieren supervisión en sitio y los propios registros de supervisión en sitio— y lo contrasta con las cláusulas que cita su paquete de reglas: si un mismo día natural lleva más de un registro o un registro con fecha fuera del periodo de servicio, qué días del periodo no tienen registro, si cada registro rellena sus columnas y nombra a quien lo redactó, si existe la lista declarada de partes y procesos clave y cada uno de ellos tiene su registro de supervisión en sitio, si el registro de supervisión en sitio lleva hora de inicio y de fin en orden, la parte y el proceso clave, la empresa constructora, lo que se encontró y las firmas, y si la supervisión en sitio declarada en un registro diario tiene un registro en la misma fecha. Todo lo que informa son diferencias literales, cada una con la cláusula de la que procede, para que las revise una persona.
+
+## Cómo se ve la salida
+
+![Terminal demo of dsh-site-log-check: real output over its SL-014 fixture](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-demo.png)
+
+Salida real de este plugin sobre su propio fixture de prueba `SL-014` — no es un montaje. El paquete de reglas no inventa citas, así que cada hallazgo nombra la cláusula aplicada y advierte que su texto no se obtuvo.
 
 ## Qué responde
 
