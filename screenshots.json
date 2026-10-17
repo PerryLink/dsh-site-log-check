@@ -1,0 +1,14 @@
+[
+  {
+    "path": "docs/assets/dsh-site-log-check-hero.png",
+    "kind": "hero",
+    "alt": "dsh-site-log-check terminal output",
+    "caption": "Real dsh-site-log-check checker output; 28 tests passed."
+  },
+  {
+    "path": "docs/assets/dsh-site-log-check-demo.gif",
+    "kind": "demo",
+    "alt": "Animated dsh-site-log-check terminal session",
+    "caption": "The same run, assembled line by line."
+  }
+]
