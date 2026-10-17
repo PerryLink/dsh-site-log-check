@@ -4,6 +4,13 @@
 
 `dsh-site-log-check` lê o arquivo de fiscalização de uma obra —o período de serviço de fiscalização, os registos diários de fiscalização, a lista declarada de partes e processos-chave que exigem fiscalização no local e os próprios registos de fiscalização no local— e confronta-o com as cláusulas citadas pelo seu pacote de regras: se um mesmo dia de calendário tem mais de um registo ou um registo com data fora do período de serviço, que dias do período não têm registo, se cada registo preenche as suas colunas e indica quem o elaborou, se a lista declarada de partes e processos-chave existe e cada uma delas tem registo de fiscalização no local, se o registo de fiscalização no local traz hora de início e de fim por ordem, a parte e o processo-chave, a empresa construtora, o que foi encontrado e as assinaturas, e se a fiscalização no local declarada num registo diário tem registo na mesma data. Tudo o que reporta são diferenças literais, cada uma com a cláusula de onde vem, para revisão por uma pessoa.
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-site-log-check
+dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
+```
+
 ## Como é a saída
 
 ![Terminal demo of dsh-site-log-check: real output over its SL-014 fixture](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-hero.png)
@@ -51,13 +58,6 @@ reports literal mismatches against cited clauses.
 ## What it does
 
 A tabela de regras, os campos e o comportamento detalhado estão em [README.md](README.md#what-it-does) (versão principal em inglês). O plugin apenas lista divergências literais frente às cláusulas citadas e indica em `skipped` cada verificação que não pôde ser executada.
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-site-log-check
-dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
-```
 
 ## Configuration
 

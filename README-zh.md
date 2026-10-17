@@ -4,6 +4,13 @@
 
 `dsh-site-log-check` 读取一个工程项目的监理资料——监理服务期、逐日监理日志、声明需要旁站的关键部位与关键工序清单、旁站记录——并按本规则库引用的条款逐项核对：同一日历日是否出现两条以上日志、日志日期是否落在监理服务期内、服务期内哪些日子没有日志、每条日志是否填写了各项栏目与记录人、声明的旁站清单是否存在且每项关键部位或关键工序都有对应旁站记录、旁站记录是否填写了起止时间且先后顺序正确、关键部位或关键工序、施工单位、发现的问题及处理情况与签字，以及日志中声明的旁站情况在当日是否有旁站记录对应。报出的都是字面差异，每条差异都带出它依据的条款，供人工复核。
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-site-log-check
+dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
+```
+
 ## 实际输出长什么样
 
 ![Terminal demo of dsh-site-log-check: real output over its SL-014 fixture](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-hero.png)
@@ -51,13 +58,6 @@ reports literal mismatches against cited clauses.
 ## What it does
 
 规则表、字段说明与行为细节见 [README.md](README.md#what-it-does)（英文主版本）。本插件只列出材料与所引条款之间的字面差异，并对无法执行的检查在 `skipped` 中逐项说明。
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-site-log-check
-dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
-```
 
 ## Configuration
 

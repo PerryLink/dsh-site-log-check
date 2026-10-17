@@ -4,6 +4,13 @@
 
 `dsh-site-log-check` किसी निर्माण परियोजना का पर्यवेक्षण अभिलेख पढ़ता है — पर्यवेक्षण सेवा अवधि, दैनिक पर्यवेक्षण लॉग, स्थल-पर्यवेक्षण आवश्यक बताए गए मुख्य भागों और प्रक्रियाओं की घोषित सूची, और स्थल-पर्यवेक्षण रिकॉर्ड — और उसे अपने नियम-पैक में उद्धृत धाराओं से मिलाता है: क्या एक ही कैलेंडर दिन पर एक से अधिक लॉग हैं या कोई लॉग सेवा अवधि के बाहर की तारीख का है, अवधि के कौन-से दिन बिना लॉग हैं, क्या प्रत्येक लॉग अपने कॉलम भरता है और लेखक का नाम देता है, घोषित सूची मौजूद है और हर मुख्य भाग या प्रक्रिया का स्थल-पर्यवेक्षण रिकॉर्ड है, स्थल-पर्यवेक्षण रिकॉर्ड में आरंभ और समाप्ति समय क्रम में, मुख्य भाग या प्रक्रिया, निर्माण इकाई, जो पाया गया और हस्ताक्षर दर्ज हैं, और लॉग में बताया गया स्थल-पर्यवेक्षण उसी तारीख के रिकॉर्ड से मेल खाता है। जो दर्ज होता है वह शब्दशः अंतर है और हर अंतर के साथ उसकी धारा आती है; समीक्षा मनुष्य करता है।
 
+## Install
+
+```sh
+dsh plugin --profile <name> add dsh-site-log-check
+dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
+```
+
 ## आउटपुट कैसा दिखता है
 
 ![Terminal demo of dsh-site-log-check: real output over its SL-014 fixture](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-hero.png)
@@ -51,13 +58,6 @@ reports literal mismatches against cited clauses.
 ## What it does
 
 नियम-सूची, फ़ील्ड और विस्तृत व्यवहार [README.md](README.md#what-it-does) (अंग्रेज़ी मुख्य संस्करण) में हैं। यह प्लगइन केवल उद्धृत धाराओं के सामने शाब्दिक अंतर सूचीबद्ध करता है और हर न चल पाई जाँच को `skipped` में बताता है।
-
-## Install
-
-```sh
-dsh plugin --profile <name> add dsh-site-log-check
-dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
-```
 
 ## Configuration
 
