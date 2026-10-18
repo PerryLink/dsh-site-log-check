@@ -41,12 +41,7 @@ dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
 | 《建设工程质量管理条例》 | 国务院令第279号 | SL-008 |
 | 《房屋建筑工程施工旁站监理管理办法（试行）》 | 建市〔2002〕189号 | SL-011, SL-012 |
 
-**Boundary:** this plugin checks the **continuity of the daily supervision log and the coverage of
-on-site supervision records** for a construction project — the site-supervision domain (工程监理).
-It is not `dsh-archive-check` (which checks whether project records are complete for archiving), not
-`dsh-hazplan-check` (which checks the sections of a plan for a hazardous sub-project), and not a
-site-safety inspector. It reads a machine-readable export of the supervision office's own records and
-reports literal mismatches against cited clauses.
+**边界（中文译文，以英文原文为准）：** 本插件核对一个施工项目的 **日常监理日志的连续性以及现场监理记录的覆盖情况**——即工程监理领域。它不是 `dsh-archive-check`（该插件核对项目记录在归档层面是否齐备），不是 `dsh-hazplan-check`（该插件核对危险性较大分部分项工程专项方案的章节），也不是现场安全检查员。它读取监理机构自身记录的机器可读导出，报出与所引条款之间的字面差异。
 
 ## Compatibility
 
