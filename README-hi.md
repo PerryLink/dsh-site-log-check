@@ -20,13 +20,19 @@ dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
 
 ## आउटपुट कैसा दिखता है
 
-![Terminal demo of dsh-site-log-check: real output over its SL-014 fixture](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-hero.png)
+![dsh-site-log-check कार्यप्रवाह आरेख: दस्तावेज़ → नियम → निष्कर्ष।](docs/assets/dsh-site-log-check-flow.svg)
 
-![Animated terminal demo of dsh-site-log-check](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-demo.gif)
+*कार्यप्रवाह: दस्तावेज़ → नियम → निष्कर्ष। नीचे के उदाहरण वास्तविक कमांड सतह का उपयोग करते हैं।*
+
 
 इस प्लगइन का अपने ही `SL-014` टेस्ट फ़िक्स्चर पर वास्तविक आउटपुट — कोई नकली चित्र नहीं। नियम-पैक उद्धरण नहीं गढ़ता, इसलिए हर निष्कर्ष लागू किए गए खंड का नाम और यह भी बताता है कि उसका मूल पाठ इस बार प्राप्त नहीं हुआ।
 
 ## यह किन सवालों का जवाब देता है
+
+### उदाहरण
+
+नीचे दी गई तालिका उदाहरण-समुच्चय है: पहली पंक्ति विस्तृत केस है, बाकी संक्षिप्त केस हैं।
+
 
 | आपका सवाल | इसका जवाब |
 |---|---|

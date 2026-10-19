@@ -20,13 +20,17 @@ dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
 
 ## What it looks like
 
-![Terminal demo of dsh-site-log-check: real output over its SL-014 fixture](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-hero.png)
+![Workflow diagram for dsh-site-log-check: document → rule pack → findings.](docs/assets/dsh-site-log-check-flow.svg)
 
-![Animated terminal demo of dsh-site-log-check](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-demo.gif)
+*Workflow overview: document → rule pack → findings. The examples below use the real command surface.*
 
-Real output from this plugin over its own `SL-014` test fixture — not a mock-up. The rule pack ships no invented quotations, so a finding names both the clause it applied and the fact that the clause text was not obtained.
+
 
 ## What it answers
+
+### Examples
+
+The table below is the example set: the first row is the detailed walkthrough, the remaining rows are short cases.
 
 | You ask | What it answers |
 |---|---|

@@ -20,13 +20,19 @@ dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
 
 ## Cómo se ve la salida
 
-![Terminal demo of dsh-site-log-check: real output over its SL-014 fixture](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-hero.png)
+![Diagrama de flujo de dsh-site-log-check: documento → reglas → hallazgos.](docs/assets/dsh-site-log-check-flow.svg)
 
-![Animated terminal demo of dsh-site-log-check](https://raw.githubusercontent.com/PerryLink/dsh-site-log-check/main/docs/assets/dsh-site-log-check-demo.gif)
+*Resumen del flujo: documento → reglas → hallazgos. Los ejemplos siguientes usan la superficie de comandos real.*
+
 
 Salida real de este plugin sobre su propio fixture de prueba `SL-014` — no es un montaje. El paquete de reglas no inventa citas, así que cada hallazgo nombra la cláusula aplicada y advierte que su texto no se obtuvo.
 
 ## Qué responde
+
+### Ejemplos
+
+La tabla siguiente es el conjunto de ejemplos: la primera fila es el caso detallado y las demás son casos breves.
+
 
 | Usted pregunta | Qué responde |
 |---|---|
