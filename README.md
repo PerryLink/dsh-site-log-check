@@ -8,6 +8,7 @@ dsh plugin --profile <name> add dsh-site-log-check
 
 
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-site-log-check?metric=downloads)](https://dshfind.com/en/plugins/PerryLink/dsh-site-log-check?ref=badge)
 
 `dsh-site-log-check` reads one construction project's supervision archive — the supervision service period, the daily supervision logs, the declared list of key works requiring on-site supervision, and the on-site supervision records — and checks that archive against the clauses its rule pack cites: whether one calendar day carries more than one log or a log dated outside the service period, which days of the period have no log, whether each log fills its content items and names a recorder, whether the declared key-work list exists and every declared key work has an on-site record, whether an on-site record carries start and end times in order, its key work, its contractor, what was found and the signatures, and whether on-site supervision claimed in a log is matched by an on-site record on the same date. Every difference it reports is literal and carries the clause it came from, and the report lists those differences for a human to review.
 

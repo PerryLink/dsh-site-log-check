@@ -8,6 +8,7 @@ dsh plugin --profile <name> add dsh-site-log-check
 
 
 [![DSH Market](https://raw.githubusercontent.com/2BingLing/dsh-market/master/assets/readme/badge-listed-en.svg)](https://dsh.market/)
+[![dshfind](https://dshfind.com/api/badge/PerryLink/dsh-site-log-check?metric=downloads)](https://dshfind.com/en/plugins/PerryLink/dsh-site-log-check?ref=badge)
 
 `dsh-site-log-check` lê o arquivo de fiscalização de uma obra —o período de serviço de fiscalização, os registos diários de fiscalização, a lista declarada de partes e processos-chave que exigem fiscalização no local e os próprios registos de fiscalização no local— e confronta-o com as cláusulas citadas pelo seu pacote de regras: se um mesmo dia de calendário tem mais de um registo ou um registo com data fora do período de serviço, que dias do período não têm registo, se cada registo preenche as suas colunas e indica quem o elaborou, se a lista declarada de partes e processos-chave existe e cada uma delas tem registo de fiscalização no local, se o registo de fiscalização no local traz hora de início e de fim por ordem, a parte e o processo-chave, a empresa construtora, o que foi encontrado e as assinaturas, e se a fiscalização no local declarada num registo diário tem registo na mesma data. Tudo o que reporta são diferenças literais, cada uma com a cláusula de onde vem, para revisão por uma pessoa.
 
