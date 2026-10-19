@@ -35,6 +35,39 @@ Saída real deste plugin sobre o seu próprio fixture de teste `SL-014` — não
 A tabela abaixo é o conjunto de exemplos: a primeira linha é o caso detalhado e as demais são casos curtos.
 
 
+#### Saída detalhada
+
+**Ferramenta** `site_log_check`
+
+**Entrada**
+
+~~~yaml
+project:
+  serviceStart: "2026-03-01"
+  serviceEnd: "2026-03-05"
+logs:
+  - date: "2026-03-01"
+  - date: "2026-03-05"
+~~~
+ 
+**Saída**
+
+~~~json
+{
+  "id": "dsh-site-log-check.SL-002.378ce636",
+  "ruleId": "SL-002",
+  "severity": "info",
+  "locator": {
+    "cell": "2026-03-02"
+  },
+  "found": "2026-03-02 无监理日志记录",
+  "expected": "监理服务期 2026-03-01 ~ 2026-03-05 内应按日历日记录",
+  "fix": "核对是否因停工、节假日或日志未归档；确无施工活动的应有说明"
+}
+~~~
+
+*Observado em `dsh-site-log-check/tests/fixtures/SL-002/SL-002-unsafe.yaml`*
+
 | Você pergunta | O que ele responde |
 |---|---|
 | Dois registos diários trazem a mesma data de calendário — isso é reportado? | Sim. `SL-001` aplica `params.maxPerDay` (1) e assinala cada dia de calendário com mais de um registo; assinala também o registo cuja data fica fora do período de serviço obtido de `project.serviceStart` e `project.serviceEnd`. Compara datas e contagens; não decide qual dos dois lançamentos é o do dia nem se um lançamento acrescentado depois se justificava. Se nenhuma data do material for legível, a regra reporta que não pôde ser executada em vez de passar em silêncio. |

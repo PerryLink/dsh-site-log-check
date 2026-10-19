@@ -33,6 +33,39 @@ dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
 
 The table below is the example set: the first row is the detailed walkthrough, the remaining rows are short cases.
 
+#### Detailed output
+
+**Tool** `site_log_check`
+
+**Input**
+
+~~~yaml
+project:
+  serviceStart: "2026-03-01"
+  serviceEnd: "2026-03-05"
+logs:
+  - date: "2026-03-01"
+  - date: "2026-03-05"
+~~~
+ 
+**Output**
+
+~~~json
+{
+  "id": "dsh-site-log-check.SL-002.378ce636",
+  "ruleId": "SL-002",
+  "severity": "info",
+  "locator": {
+    "cell": "2026-03-02"
+  },
+  "found": "2026-03-02 无监理日志记录",
+  "expected": "监理服务期 2026-03-01 ~ 2026-03-05 内应按日历日记录",
+  "fix": "核对是否因停工、节假日或日志未归档；确无施工活动的应有说明"
+}
+~~~
+
+*Observed from `dsh-site-log-check/tests/fixtures/SL-002/SL-002-unsafe.yaml`*
+
 | You ask | What it answers |
 |---|---|
 | Two log entries carry the same calendar date — is that reported? | Yes. `SL-001` applies `params.maxPerDay` (1) and reports every calendar day that carries more than one log; it also reports a log whose date falls outside the service period taken from `project.serviceStart` and `project.serviceEnd`. It compares dates and counts; it does not decide which of the two entries is that day's record, nor whether an entry added later was justified. If no log date in the material can be read, the rule reports itself in `skipped` instead of passing. |

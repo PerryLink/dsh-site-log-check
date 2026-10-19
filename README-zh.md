@@ -30,6 +30,39 @@ dsh --profile <name> --dump-config | grep 'dsh-site-log-check'
 下表是示例集：第一行是详细走查，其余行是简短案例。
 
 
+#### 详细输出
+
+**工具** `site_log_check`
+
+**输入**
+
+~~~yaml
+project:
+  serviceStart: "2026-03-01"
+  serviceEnd: "2026-03-05"
+logs:
+  - date: "2026-03-01"
+  - date: "2026-03-05"
+~~~
+ 
+**输出**
+
+~~~json
+{
+  "id": "dsh-site-log-check.SL-002.378ce636",
+  "ruleId": "SL-002",
+  "severity": "info",
+  "locator": {
+    "cell": "2026-03-02"
+  },
+  "found": "2026-03-02 无监理日志记录",
+  "expected": "监理服务期 2026-03-01 ~ 2026-03-05 内应按日历日记录",
+  "fix": "核对是否因停工、节假日或日志未归档；确无施工活动的应有说明"
+}
+~~~
+
+*来源 `dsh-site-log-check/tests/fixtures/SL-002/SL-002-unsafe.yaml`*
+
 | 你会问 | 它怎么答 |
 |---|---|
 | 两条日志写的是同一个日历日，会被报出来吗？ | 会。`SL-001` 按 `params.maxPerDay`（1）核对，同一日历日出现多条日志的逐日列出；日志日期落在 `project.serviceStart` 与 `project.serviceEnd` 所定监理服务期之外的也会报出。它只比日期和条数，不判断两条里哪条才是当日的记录，也不判断补记是否成立。材料中的日志日期全都无法识别时，本条报告无法执行，而不是静默通过。 |
