@@ -1,6 +1,6 @@
 {
   "name": "dsh-site-log-check",
-  "version": "0.2.11",
+  "version": "0.3.0",
   "description": "监理日志跨日连续性与旁站覆盖提示（依据 GB/T 50319-2013 等公开文件，仅提示差异，不作出定性结论）",
   "type": "module",
   "main": "lib/index.mjs",
@@ -86,7 +86,8 @@
     "vitest": "^3.2.7",
     "@deepseek-ai/dsh-working-directory": "0.2.1-rc.2",
     "tsdown": "^0.23.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "dsh-table-ingest": "^0.2.0"
   },
   "dependencies": {}
 }

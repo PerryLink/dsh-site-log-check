@@ -6,6 +6,7 @@ import { loadRuleset } from '../src/shared/ruleset.ts'
 import { parseMaterial } from '../src/parse.ts'
 import { runCheck } from '../src/check.ts'
 import { buildView } from '../src/view.ts'
+import { readWorkbook } from 'dsh-table-ingest/api'
 import { findForbiddenWording } from '../src/shared/wording.ts'
 import { addDays, diffDays, eachDay, parseWallClock, weekday } from '../src/shared/datetime.ts'
 import { parseYaml } from '../src/shared/yaml.ts'
@@ -297,5 +298,53 @@ describe('shared kit', () => {
       logs: [{ date: '2026-03-01', weather: '晴' }],
     })
     expect(() => parseYaml('a: 1\na: 2\n')).toThrow(/duplicate/)
+  })
+})
+
+describe('report workbook', () => {
+  /** A minimal report with one finding and one skipped rule. */
+  function sampleReport() {
+    return {
+      plugin: 'dsh-site-log-check',
+      target: '2026 年 3 月施工日志',
+      checkedAt: '2026-10-24T00:00:00.000Z',
+      rulesetVersion: '2026.1',
+      summary: { error: 1, warn: 0, info: 0 },
+      skipped: [{ rule: 'SL-099', reason: '材料没有对应字段' }],
+      issues: [
+        {
+          id: 'dsh-site-log-check.SL-001.abc12345',
+          ruleId: 'SL-001',
+          severity: 'error' as const,
+          locator: { row: 3, column: 'weather' },
+          found: '未填写',
+          expected: '应有天气',
+          basis: '《X》第一条：应有天气记录。',
+          fix: '补填天气',
+        },
+      ],
+    }
+  }
+
+  it('is a readable workbook with three sheets', () => {
+    const workbook = readWorkbook(Buffer.from(buildView(sampleReport()).workbookBase64, 'base64'))
+    expect(workbook.sheets.map((sheet) => sheet.name)).toEqual(['汇总', '差异清单', '未执行'])
+  })
+
+  it('carries the rules that did not run, not just the findings', () => {
+    // A workbook with only findings reads as a clean bill of health; the skipped
+    // rules are exactly what a reader cannot infer from an empty diff column.
+    const workbook = readWorkbook(Buffer.from(buildView(sampleReport()).workbookBase64, 'base64'))
+    const skipped = workbook.sheets[2]
+    expect(skipped?.grid[1]?.[0]).toBe('SL-099')
+    expect(skipped?.grid[1]?.[1]).toContain('没有对应字段')
+  })
+
+  it('renders the locator and the citation into the finding row', () => {
+    const workbook = readWorkbook(Buffer.from(buildView(sampleReport()).workbookBase64, 'base64'))
+    const row = workbook.sheets[1]?.grid[1] ?? []
+    expect(row[3]).toContain('第 3 行数据')
+    expect(row[3]).toContain('字段 weather')
+    expect(row[7]).toContain('《X》第一条')
   })
 })

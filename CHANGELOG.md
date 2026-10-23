@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0
+
+The report can now be taken away as a file.
+
+- **`workbookBase64`** on the tool output: the same report as an xlsx with three
+  sheets — 汇总, 差异清单, 未执行. A chat answer disappears when the window closes; a
+  site engineer needs something he can attach to the record.
+- **The 未执行 sheet is the reason this matters.** A workbook carrying only findings
+  reads as a clean bill of health, and the rules that could not run are exactly what
+  a reader cannot infer from an empty diff column.
+- The writer moved into `_shared` (`xlsx-write.ts`, `report-xlsx.ts`) so every plugin
+  can offer the same file without copying 320 lines. This package is the first
+  consumer; markdown stays the model-facing form, because a model reads text better
+  than base64.
+- One test-only dependency: `dsh-table-ingest` reads the generated workbook back, so
+  the assertion is on parsed content rather than on byte length.
+- 31 tests.
+
+
 ## [0.2.11] - 2026-10-18
 
 ### Fixed

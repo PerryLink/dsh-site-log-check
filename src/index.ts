@@ -112,6 +112,7 @@ export function apply(ctx: Context, config: ConfigShape): () => void {
             skippedCount: { type: 'integer' },
             markdown: { type: 'string' },
             reportJson: { type: 'string' },
+            workbookBase64: { type: 'string', description: '同一份报告的 xlsx 工作簿（base64）。' },
           },
         },
         render: (_args, value) => [{ type: 'text', text: (value as { markdown: string }).markdown }],

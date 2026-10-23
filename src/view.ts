@@ -7,6 +7,7 @@
  */
 
 import { canonicalJson } from './shared/report.ts'
+import { reportWorkbook } from './shared/report-xlsx.ts'
 import { DISCLAIMER } from './shared/wording.ts'
 import type { Issue, Report, Severity } from './shared/report.ts'
 
@@ -23,6 +24,14 @@ export interface ReportView {
   skippedCount: number
   markdown: string
   reportJson: string
+  /**
+   * The same report as an xlsx workbook, base64.
+   *
+   * A chat answer disappears when the window closes; a site engineer needs a file he
+   * can attach to the record. Markdown stays the model-facing form, because a model
+   * reads text better than base64.
+   */
+  workbookBase64: string
 }
 
 function issueLines(issues: readonly Issue[]): string[] {
@@ -95,5 +104,6 @@ export function buildView(report: Report): ReportView {
     skippedCount: report.skipped.length,
     markdown: lines.join('\n'),
     reportJson: canonicalJson(report),
+    workbookBase64: reportWorkbook(report, report.target).toString('base64'),
   }
 }
