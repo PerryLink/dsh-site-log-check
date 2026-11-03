@@ -1,0 +1,10 @@
+{
+  "tool": "site_log_check",
+  "issueCount": 5,
+  "summary": {
+    "error": 0,
+    "warn": 1,
+    "info": 4
+  },
+  "skippedCount": 12
+}
