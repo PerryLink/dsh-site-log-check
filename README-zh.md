@@ -1,6 +1,6 @@
 # dsh-site-log-check — 监理日志跨日连续性与旁站覆盖提示
 
-## 快速试跑（1 分钟）
+### 快速试跑（1 分钟）
 
 ```bash
 node samples/quickstart/run.mjs --check
