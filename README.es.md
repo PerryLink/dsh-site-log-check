@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-flow-dark.svg">
-  <img src="docs/assets/dsh-site-log-check-flow-light.svg" width="100%" alt="Flujo de datos de dsh-site-log-check: material de supervisión (JSON/YAML) → site_log_check → paquete de reglas SL-001…SL-014 → informe (hallazgos + skipped); solo diferencias literales, sin dictamen">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-hero-en-dark.webp">
+  <img src="docs/assets/dsh-site-log-check-hero-en-light.webp" width="100%" alt="Banner de dsh-site-log-check: a la izquierda, el nombre, la propuesta de valor y las 14 reglas con cláusula citada; a la derecha, el carril de días del periodo de supervisión — dos registros apilados el 2026-03-01, cuatro días huecos del 03-02 al 03-05, SL-001 marcado warn y SL-002 con cuatro hallazgos info; abajo, la tarjeta real de hallazgo (dos registros con fecha 2026-03-01) y la lista skipped (12: 7 comprobaciones que no pueden ejecutarse por falta de material y 5 que se ejecutaron sin diferencias); una lista de diferencias vacía no lo es todo y la decisión queda en manos de quien revisa">
 </picture>
 
 # dsh-site-log-check
@@ -39,6 +39,11 @@ dsh plugin --profile <name> add dsh-site-log-check
 `dsh-site-log-check` lee el archivo de supervisión de una obra —el periodo de servicio de supervisión, los registros diarios de supervisión, la lista declarada de partes y procesos clave que requieren supervisión en sitio y los propios registros de supervisión en sitio— y lo contrasta con las cláusulas que cita su paquete de reglas: si un mismo día natural lleva más de un registro o un registro con fecha fuera del periodo de servicio, qué días del periodo no tienen registro, si cada registro rellena sus columnas y nombra a quien lo redactó, si existe la lista declarada y cada parte declarada tiene su registro de supervisión en sitio, si el registro lleva hora de inicio y de fin en orden, la parte y el proceso clave, la empresa constructora, lo que se encontró y las firmas, y si la supervisión en sitio declarada en un registro diario tiene un registro en la misma fecha. Todo lo que informa son diferencias literales, cada una con la cláusula de la que procede, para que las revise una persona.
 
 **Límite:** este plugin comprueba la **continuidad del registro diario de supervisión y la cobertura de los registros de supervisión en sitio** de una obra —el ámbito de la supervisión de obra (工程监理)—. No es `dsh-archive-check` (que comprueba si los registros del proyecto están completos para su archivo), no es `dsh-hazplan-check` (que comprueba las secciones del plan de una parte de obra peligrosa) ni es un inspector de seguridad en obra. Lee una exportación legible por máquina de los registros de la propia oficina de supervisión e informa de desajustes literales frente a las cláusulas citadas.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-site-log-check-flow-v5-light.svg" width="100%" alt="Estructura de dsh-site-log-check: tres carriles de evidencia (logs[], keyWorks[], onsite[]) apilados sobre una única regla de días del periodo de supervisión; el carril logs[] dibuja dos registros el 03-01 y cuatro días ausentes del 03-02 al 03-05 tras las compuertas SL-001 / SL-002 / SL-003…SL-007; keyWorks[] es la lista declarada y onsite[] la forma del registro, con SL-008 / SL-012 y SL-009 / SL-010 / SL-011 / SL-014; los puentes discontinuos entre carriles son SL-012 (nombre declarado frente a nombre del registro) y SL-013 (declaración de supervisión en sitio del registro diario frente al registro del mismo día); los carriles confluyen en issues[] y skipped[], y una ejecución del quickstart da 1 warn + 4 info con 12 skipped — 7 que no pudieron ejecutarse y 5 que se ejecutaron sin diferencias">
+</picture>
 
 ## Instalación en tres pasos
 
@@ -386,7 +391,7 @@ Estructura:
 | `tests/` | vitest; cada regla tiene su par de fixtures conforme/infractor en `tests/fixtures/<RULE>/` |
 | `samples/quickstart/` | ejemplo rápido reejecutable (entrada y salida esperada) |
 
-El paquete de reglas es dato, no código: edite `rules/*.yaml` para cambiar el conjunto de reglas sin tocar TypeScript; el paquete se valida al cargar, no se da por bueno. Las imágenes del README las genera de forma programática [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow) y se pueden volver a ejecutar sin riesgo; este plugin no tiene interfaz, así que el hero es un diagrama de flujo SVG dibujado a mano (par claro + oscuro, solo tokens de la superficie de comandos).
+El paquete de reglas es dato, no código: edite `rules/*.yaml` para cambiar el conjunto de reglas sin tocar TypeScript; el paquete se valida al cargar, no se da por bueno. Las imágenes del README las genera de forma programática [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow): el hero es un WebP de 1440×576 en cuatro variantes (zh/en × claro/oscuro), el diagrama de estructura es un SVG dibujado a mano (par claro + oscuro) y ambos se pueden volver a ejecutar sin riesgo; este plugin no tiene interfaz, así que las figuras solo dibujan las superficies del material, las compuertas de reglas y los canales del informe.
 
 Topics: `dsh`, `dsh-plugin`, `deepseek-harness`, `deepseek`, `cordis`, `site`, `log`
 

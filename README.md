@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-flow-dark.svg">
-  <img src="docs/assets/dsh-site-log-check-flow-light.svg" width="100%" alt="dsh-site-log-check 数据流：监理资料（JSON/YAML）→ site_log_check → 规则包 SL-001…SL-014 → 报告（差异 + skipped）；只列字面差异，不作定性结论">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-hero-zh-dark.webp">
+  <img src="docs/assets/dsh-site-log-check-hero-zh-light.webp" width="100%" alt="dsh-site-log-check 横幅：左侧是插件名、价值句与 14 条带条款出处的规则；右侧是监理服务期日历轨——2026-03-01 叠放两条日志，03-02 至 03-05 四个空格缺日，SL-001 判 warn、SL-002 报出 4 条 info；下方是真实判定卡（2026-03-01 出现 2 条日志）与 skipped 清单（12 条：7 条材料缺项无法执行、5 条已执行无差异）；空 issues 不等于没问题，结论留给审核人">
 </picture>
 
 # dsh-site-log-check
@@ -39,6 +39,11 @@ dsh plugin --profile <name> add dsh-site-log-check
 `dsh-site-log-check` 读取一个工程项目的监理资料——监理服务期、逐日监理日志、声明需要旁站的关键部位与关键工序清单、旁站记录——并按规则库引用的条款逐项核对：同一日历日是否出现两条以上日志、日志日期是否落在服务期内、服务期内哪些日子没有日志、每条日志是否填写了各项栏目与记录人、声明的旁站清单是否存在且每项都有对应的旁站记录、旁站记录是否填写了起止时间且先后顺序正确、关键部位与工序、施工单位、发现的问题及处理情况与签字，以及日志里声明的旁站当日是否有旁站记录对应。报出的都是字面差异，每条差异都带出它依据的条款，供人工复核。
 
 **边界：** 本插件核对一个施工项目的**日常监理日志的连续性以及现场监理记录的覆盖情况**——即工程监理领域。它不是 `dsh-archive-check`（该插件核对项目记录在归档层面是否齐备），不是 `dsh-hazplan-check`（该插件核对危险性较大分部分项工程专项方案的章节），也不是现场安全检查员。它读取监理机构自身记录的机器可读导出，报出与所引条款之间的字面差异。
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-site-log-check-flow-v5-light.svg" width="100%" alt="dsh-site-log-check 结构图：三条证据泳道（logs[]、keyWorks[]、onsite[]）叠在同一条监理服务期日历尺上；logs[] 泳道画出 03-01 两条日志与 03-02 至 03-05 四个缺日，挂着 SL-001 / SL-002 / SL-003…007 三道闸；keyWorks[] 是声明的清单，onsite[] 是旁站记录形状，分别挂着 SL-008、SL-012 与 SL-009 / SL-010 / SL-011 / SL-014；跨泳道虚线是 SL-012（清单与记录名称对应）和 SL-013（日志旁站声明与当日记录对应）；三条泳道汇入 issues[] 与 skipped[]，样例一次运行 1 warn + 4 info、12 skipped，其中 7 条无法执行、5 条已执行无差异">
+</picture>
 
 ## 三步上手
 
@@ -381,7 +386,7 @@ node ../scripts/sync-shared.mjs dsh-site-log-check   # 从 ../_shared 刷新 src
 | `tests/` | vitest；每条规则在 `tests/fixtures/<RULE>/` 下配对正/反夹具 |
 | `samples/quickstart/` | 可复跑的快速样例（输入 + 期望输出） |
 
-规则包是数据不是代码：改 `rules/*.yaml` 即切换规则集，无需动 TypeScript；规则包在加载期校验，而非被信任。README 配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python + Pillow），可重复执行；本插件无 UI，hero 为手绘 SVG 流程图（深浅双版，图内仅命令面 token）。
+规则包是数据不是代码：改 `rules/*.yaml` 即切换规则集，无需动 TypeScript；规则包在加载期校验，而非被信任。README 配图由 [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) 程序化生成（Python + Pillow）：hero 为 1440×576 的四版 WebP（中英 × 深浅），结构图为手写 SVG（深浅双版），均可重复执行；本插件无 UI，图内只画材料面、规则闸与报告通道。
 
 Topics：`dsh`, `dsh-plugin`, `deepseek-harness`, `deepseek`, `cordis`, `site`, `log`
 

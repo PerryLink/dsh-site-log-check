@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-flow-dark.svg">
-  <img src="docs/assets/dsh-site-log-check-flow-light.svg" width="100%" alt="dsh-site-log-check data flow: supervision material (JSON/YAML) → site_log_check → rule pack SL-001…SL-014 → report (findings + skipped); literal differences only, no verdict">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-hero-en-dark.webp">
+  <img src="docs/assets/dsh-site-log-check-hero-en-light.webp" width="100%" alt="dsh-site-log-check hero: left, the plugin name, its value and 14 cited rules; right, the supervision-period day rail — two stacked logs on 2026-03-01, four hollow missing days from 03-02 to 03-05, SL-001 flagged warn and SL-002 reporting four info findings; below, the real finding card (two logs dated 2026-03-01) and the skipped list (12: 7 checks that cannot run for missing material, 5 that ran with no difference); an empty issue list is not all clear and the reviewer decides">
 </picture>
 
 # dsh-site-log-check
@@ -39,6 +39,11 @@ dsh plugin --profile <name> add dsh-site-log-check
 `dsh-site-log-check` reads one construction project's supervision archive — the supervision service period, the daily supervision logs, the declared list of key parts and key processes that require on-site supervision, and the on-site supervision records themselves — and checks it against the clauses its rule pack cites: whether one calendar day carries more than one log or a log dated outside the service period, which days of the period have no log, whether each log fills its content columns and names a recorder, whether the declared key-work list exists and every declared item has an on-site record, whether an on-site record carries start and end times in order, its key part and process, its contractor, what was found and the signatures, and whether on-site supervision claimed in a log is matched by an on-site record on the same date. Every difference it reports is literal and carries the clause it came from, and the report lists those differences for a human to review.
 
 **Boundary:** this plugin checks the **continuity of the daily supervision log and the coverage of on-site supervision records** for a construction project — the site-supervision domain (engineering supervision). It is not `dsh-archive-check` (which checks whether project records are complete for archiving), not `dsh-hazplan-check` (which checks the sections of a plan for a hazardous sub-project), and not a site-safety inspector. It reads a machine-readable export of the supervision office's own records and reports literal mismatches against cited clauses.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-site-log-check-flow-v5-light.svg" width="100%" alt="dsh-site-log-check structure: three evidence swimlanes (logs[], keyWorks[], onsite[]) stacked over one supervision-period day ruler; the logs[] lane draws two logs on 03-01 and four missing days from 03-02 to 03-05 behind the SL-001 / SL-002 / SL-003…SL-007 gates; keyWorks[] is the declared list and onsite[] the record shape, with SL-008 / SL-012 and SL-009 / SL-010 / SL-011 / SL-014; the dashed cross-lane bridges are SL-012 (declared name vs record name) and SL-013 (a log's on-site claim vs the same-day record); the lanes aggregate into issues[] and skipped[], and one quickstart run gives 1 warn + 4 info with 12 skipped — 7 that could not run and 5 that ran with no difference">
+</picture>
 
 ## Three-step setup
 
@@ -394,7 +399,7 @@ Layout:
 | `tests/` | vitest; every rule has a paired compliant/violating fixture under `tests/fixtures/<RULE>/` |
 | `samples/quickstart/` | a re-runnable quickstart (input plus expected output) |
 
-The rule pack is data, not code: edit `rules/*.yaml` to switch the rule set without touching TypeScript; the pack is validated on load, not trusted. README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow) and can be re-run safely; this plugin has no UI, so the hero is a hand-written SVG flow diagram (light + dark pair, command-surface tokens only).
+The rule pack is data, not code: edit `rules/*.yaml` to switch the rule set without touching TypeScript; the pack is validated on load, not trusted. README images are generated programmatically by [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow): the hero is a 1440×576 WebP in four variants (zh/en × light/dark), the structure diagram is a hand-written SVG pair (light + dark), and both can be re-run safely; this plugin has no UI, so the figures draw only the material surfaces, rule gates and report channels.
 
 Topics: `dsh`, `dsh-plugin`, `deepseek-harness`, `deepseek`, `cordis`, `site`, `log`
 

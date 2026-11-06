@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-flow-dark.svg">
-  <img src="docs/assets/dsh-site-log-check-flow-light.svg" width="100%" alt="Fluxo de dados do dsh-site-log-check: material de fiscalização (JSON/YAML) → site_log_check → pacote de regras SL-001…SL-014 → relatório (achados + skipped); apenas diferenças literais, sem juízo">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-hero-en-dark.webp">
+  <img src="docs/assets/dsh-site-log-check-hero-en-light.webp" width="100%" alt="Banner do dsh-site-log-check: à esquerda, o nome, a proposta de valor e as 14 regras com cláusula citada; à direita, a faixa de dias do período de supervisão — dois registos empilhados em 2026-03-01, quatro dias vazios de 03-02 a 03-05, SL-001 marcado warn e SL-002 com quatro achados info; abaixo, o cartão real de ocorrência (dois registos com data 2026-03-01) e a lista skipped (12: 7 verificações que não podem correr por falta de material e 5 que correram sem diferenças); uma lista de diferenças vazia não significa que está tudo bem e a decisão fica com quem revê">
 </picture>
 
 # dsh-site-log-check
@@ -39,6 +39,11 @@ dsh plugin --profile <name> add dsh-site-log-check
 O `dsh-site-log-check` lê o arquivo de fiscalização de uma obra — o período de serviço de fiscalização, os registos diários de fiscalização, a lista declarada de partes e processos-chave que exigem fiscalização no local e os próprios registos de fiscalização no local — e confronta-o com as cláusulas citadas pelo seu pacote de regras: se um mesmo dia de calendário tem mais de um registo ou um registo com data fora do período de serviço, que dias do período não têm registo, se cada registo preenche as suas colunas e indica quem o elaborou, se a lista declarada existe e cada parte declarada tem o seu registo de fiscalização no local, se o registo traz hora de início e de fim por ordem, a parte e o processo-chave, a empresa construtora, o que foi encontrado e as assinaturas, e se a fiscalização no local declarada num registo diário tem registo na mesma data. Tudo o que reporta são diferenças literais, cada uma com a cláusula de onde vem, para revisão por uma pessoa.
 
 **Limite:** este plugin verifica a **continuidade do registo diário de fiscalização e a cobertura dos registos de fiscalização no local** de uma obra — o domínio da fiscalização de obras (工程监理). Não é o `dsh-archive-check` (que verifica se os registos do projeto estão completos para arquivo), não é o `dsh-hazplan-check` (que verifica as secções do plano de uma parte de obra perigosa) nem é um inspetor de segurança no local. Lê uma exportação legível por máquina dos registos do próprio gabinete de fiscalização e reporta divergências literais frente às cláusulas citadas.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-site-log-check-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-site-log-check-flow-v5-light.svg" width="100%" alt="Estrutura do dsh-site-log-check: três faixas de evidência (logs[], keyWorks[], onsite[]) empilhadas sobre uma única régua de dias do período de supervisão; a faixa logs[] desenha dois registos em 03-01 e quatro dias em falta de 03-02 a 03-05 atrás das portas SL-001 / SL-002 / SL-003…SL-007; keyWorks[] é a lista declarada e onsite[] a forma do registo, com SL-008 / SL-012 e SL-009 / SL-010 / SL-011 / SL-014; as pontes tracejadas entre faixas são SL-012 (nome declarado vs nome do registo) e SL-013 (declaração de supervisão no local do registo diário vs registo do mesmo dia); as faixas convergem em issues[] e skipped[], e uma execução do quickstart dá 1 warn + 4 info com 12 skipped — 7 que não puderam correr e 5 que correram sem diferenças">
+</picture>
 
 ## Instalação em três passos
 
@@ -386,7 +391,7 @@ Estrutura:
 | `tests/` | vitest; cada regra tem o seu par de fixtures conforme/infrator em `tests/fixtures/<RULE>/` |
 | `samples/quickstart/` | exemplo rápido reexecutável (entrada e saída esperada) |
 
-O pacote de regras é dado, não código: edite `rules/*.yaml` para trocar o conjunto de regras sem tocar em TypeScript; o pacote é validado ao carregar, não é presumido correto. As imagens do README são geradas programaticamente por [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow) e podem ser reexecutadas sem risco; este plugin não tem interface, pelo que o hero é um diagrama de fluxo SVG desenhado à mão (par claro + escuro, apenas tokens da superfície de comandos).
+O pacote de regras é dado, não código: edite `rules/*.yaml` para trocar o conjunto de regras sem tocar em TypeScript; o pacote é validado ao carregar, não é presumido correto. As imagens do README são geradas programaticamente por [`scripts/gen-readme-assets.py`](scripts/gen-readme-assets.py) (Python + Pillow): o hero é um WebP de 1440×576 em quatro variantes (zh/en × claro/escuro), o diagrama de estrutura é um SVG desenhado à mão (par claro + escuro) e ambos podem ser reexecutados sem risco; este plugin não tem interface, pelo que as figuras desenham apenas as superfícies do material, as portas das regras e os canais do relatório.
 
 Topics: `dsh`, `dsh-plugin`, `deepseek-harness`, `deepseek`, `cordis`, `site`, `log`
 
