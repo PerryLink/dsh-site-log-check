@@ -110,6 +110,17 @@ export function apply(ctx: Context, config: ConfigShape): () => void {
             },
             issueCount: { type: 'integer' },
             skippedCount: { type: 'integer' },
+            execution: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                total: { type: 'integer' },
+                executed: { type: 'integer' },
+                skipped: { type: 'integer' },
+                manual: { type: 'integer' },
+                unsupported: { type: 'integer' },
+              },
+            },
             markdown: { type: 'string' },
             reportJson: { type: 'string' },
             workbookBase64: { type: 'string', description: '同一份报告的 xlsx 工作簿（base64）。' },
