@@ -1,0 +1,142 @@
+[
+  {
+    "file": "corpus/SL-001-expected-state.yaml",
+    "ruleId": "SL-001",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-001-difference-present.yaml",
+    "ruleId": "SL-001",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-002-expected-state.yaml",
+    "ruleId": "SL-002",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-002-difference-present.yaml",
+    "ruleId": "SL-002",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-003-expected-state.yaml",
+    "ruleId": "SL-003",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-003-difference-present.yaml",
+    "ruleId": "SL-003",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-004-expected-state.yaml",
+    "ruleId": "SL-004",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-004-difference-present.yaml",
+    "ruleId": "SL-004",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-005-expected-state.yaml",
+    "ruleId": "SL-005",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-005-difference-present.yaml",
+    "ruleId": "SL-005",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-006-expected-state.yaml",
+    "ruleId": "SL-006",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-006-difference-present.yaml",
+    "ruleId": "SL-006",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-007-expected-state.yaml",
+    "ruleId": "SL-007",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-007-difference-present.yaml",
+    "ruleId": "SL-007",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-008-expected-state.yaml",
+    "ruleId": "SL-008",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-008-difference-present.yaml",
+    "ruleId": "SL-008",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-009-expected-state.yaml",
+    "ruleId": "SL-009",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-009-difference-present.yaml",
+    "ruleId": "SL-009",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-010-expected-state.yaml",
+    "ruleId": "SL-010",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-010-difference-present.yaml",
+    "ruleId": "SL-010",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-011-expected-state.yaml",
+    "ruleId": "SL-011",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-011-difference-present.yaml",
+    "ruleId": "SL-011",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-012-expected-state.yaml",
+    "ruleId": "SL-012",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-012-difference-present.yaml",
+    "ruleId": "SL-012",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-013-expected-state.yaml",
+    "ruleId": "SL-013",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-013-difference-present.yaml",
+    "ruleId": "SL-013",
+    "positive": true
+  },
+  {
+    "file": "corpus/SL-014-expected-state.yaml",
+    "ruleId": "SL-014",
+    "positive": false
+  },
+  {
+    "file": "corpus/SL-014-difference-present.yaml",
+    "ruleId": "SL-014",
+    "positive": true
+  }
+]

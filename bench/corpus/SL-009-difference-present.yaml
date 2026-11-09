@@ -1,0 +1,12 @@
+target: 某住宅楼工程 监理日志与旁站记录
+project:
+  name: 某住宅楼工程
+  serviceStart: "2026-03-01"
+  serviceEnd: "2026-03-05"
+onsite:
+  - id: PZ-0001
+    keyWork: 混凝土浇筑
+    contractor: 某建筑公司
+    issues: 未发现问题；坍落度经检测符合要求
+    supervisorSignature: 张监理
+    contractorSignature: 李质检
