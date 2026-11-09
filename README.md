@@ -1,6 +1,6 @@
 # dsh-site-log-check — Construction supervision log continuity and on-site supervision record coverage check
 
-[English](README.md) · [简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+[English](README.md) · [简体中文](README-zh.md)
 
 ```sh
 dsh plugin --profile <name> add dsh-site-log-check
