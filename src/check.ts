@@ -489,6 +489,8 @@ export function runCheck(input: SiteLogInput, ruleset: Ruleset, options: CheckOp
     }
   }
 
+  const skippedRules = new Set(skipped.flatMap((entry) => entry.rule.split(',')))
+  const executed = ruleset.rules.length - skippedRules.size
   return makeReport({
     plugin: options.plugin,
     target: input.target,
@@ -496,5 +498,6 @@ export function runCheck(input: SiteLogInput, ruleset: Ruleset, options: CheckOp
     checkedAt: options.checkedAt,
     issues: context.issues,
     skipped,
+    execution: { total: ruleset.rules.length, executed, skipped: skippedRules.size, manual: 0, unsupported: 0 },
   })
 }

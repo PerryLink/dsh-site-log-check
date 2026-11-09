@@ -5,7 +5,10 @@
     "yaml",
     "json",
     "docx",
-    "pdf-text"
+    "xlsx",
+    "xlsm",
+    "csv",
+    "tsv"
   ],
   "outputs": [
     "markdown",
@@ -24,8 +27,8 @@
     "measured_at": "2026-11-09"
   },
   "limits": [
-    "监理日志多为项目方私有资料，本仓没有可公开的真实语料；P/R 无法在不取得脱敏数据的前提下计算",
-    "不判断施工质量或安全结论，只核对日志要素与签名/时间等字面一致性",
-    "未取得真实语料前，只能把夹具通过率当回归信号，不能当生产 P/R"
+    "监理日志多为项目方私有资料；合成 bench 不是真实 P/R",
+    "文档入口需要另装 dsh-table-ingest；CSV 不携带 project 表头，需传 projectName/serviceStart/serviceEnd",
+    "不判断施工质量或安全结论，只核对日志要素与签名/时间等字面一致性"
   ]
 }
