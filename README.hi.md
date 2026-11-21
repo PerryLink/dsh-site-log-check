@@ -45,6 +45,11 @@ dsh plugin --profile <name> add dsh-site-log-check
   <img src="docs/assets/dsh-site-log-check-flow-v5-light.svg" width="100%" alt="dsh-site-log-check संरचना: तीन साक्ष्य-पट्टियाँ (logs[], keyWorks[], onsite[]) एक ही पर्यवेक्षण-अवधि दिन-पैमाने पर; logs[] पट्टी 03-01 पर दो लॉग और 03-02 से 03-05 तक चार अनुपस्थित दिन दिखाती है, SL-001 / SL-002 / SL-003…SL-007 द्वारों के साथ; keyWorks[] घोषित सूची है और onsite[] अभिलेख का आकार, जिन पर SL-008 / SL-012 और SL-009 / SL-010 / SL-011 / SL-014 हैं; पट्टियों के बीच बिंदुदार पुल SL-012 (घोषित नाम बनाम अभिलेख नाम) और SL-013 (लॉग का स्थल-पर्यवेक्षण दावा बनाम उसी दिन का अभिलेख) हैं; पट्टियाँ issues[] और skipped[] में मिलती हैं, और quickstart की एक बार में 1 warn + 4 info तथा 12 skipped मिलते हैं — 7 नहीं चल सकीं और 5 बिना अंतर के चलीं">
 </picture>
 
+![dsh-site-log-check का असली टर्मिनल रन](docs/assets/dsh-site-log-check-demo.gif)
+
+*इस रिपॉज़िटरी में दर्ज असली रन का एनिमेटेड रीप्ले।*
+
+
 ## तीन चरणों में शुरुआत
 
 1. **इंस्टॉल** (एक चैनल चुनें):

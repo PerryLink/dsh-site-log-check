@@ -45,6 +45,11 @@ dsh plugin --profile <name> add dsh-site-log-check
   <img src="docs/assets/dsh-site-log-check-flow-v5-light.svg" width="100%" alt="Estructura de dsh-site-log-check: tres carriles de evidencia (logs[], keyWorks[], onsite[]) apilados sobre una única regla de días del periodo de supervisión; el carril logs[] dibuja dos registros el 03-01 y cuatro días ausentes del 03-02 al 03-05 tras las compuertas SL-001 / SL-002 / SL-003…SL-007; keyWorks[] es la lista declarada y onsite[] la forma del registro, con SL-008 / SL-012 y SL-009 / SL-010 / SL-011 / SL-014; los puentes discontinuos entre carriles son SL-012 (nombre declarado frente a nombre del registro) y SL-013 (declaración de supervisión en sitio del registro diario frente al registro del mismo día); los carriles confluyen en issues[] y skipped[], y una ejecución del quickstart da 1 warn + 4 info con 12 skipped — 7 que no pudieron ejecutarse y 5 que se ejecutaron sin diferencias">
 </picture>
 
+![dsh-site-log-check: ejecución real de terminal](docs/assets/dsh-site-log-check-demo.gif)
+
+*Repetición animada de una ejecución real registrada en este repositorio.*
+
+
 ## Instalación en tres pasos
 
 1. **Instalar** (elija un canal):

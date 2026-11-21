@@ -140,6 +140,10 @@ The pack has no `error`-level rule; the reason is in "Standards it follows".
 
 ### Examples
 
+![dsh-site-log-check: real terminal run](docs/assets/dsh-site-log-check-demo.gif)
+
+*Animated replay of a real run recorded in this repository.*
+
 These are the plugin's real entry points; install once, then call one.
 
 **Detailed output** — tool `site_log_check`, input:

@@ -45,6 +45,11 @@ O `dsh-site-log-check` lê o arquivo de fiscalização de uma obra — o períod
   <img src="docs/assets/dsh-site-log-check-flow-v5-light.svg" width="100%" alt="Estrutura do dsh-site-log-check: três faixas de evidência (logs[], keyWorks[], onsite[]) empilhadas sobre uma única régua de dias do período de supervisão; a faixa logs[] desenha dois registos em 03-01 e quatro dias em falta de 03-02 a 03-05 atrás das portas SL-001 / SL-002 / SL-003…SL-007; keyWorks[] é a lista declarada e onsite[] a forma do registo, com SL-008 / SL-012 e SL-009 / SL-010 / SL-011 / SL-014; as pontes tracejadas entre faixas são SL-012 (nome declarado vs nome do registo) e SL-013 (declaração de supervisão no local do registo diário vs registo do mesmo dia); as faixas convergem em issues[] e skipped[], e uma execução do quickstart dá 1 warn + 4 info com 12 skipped — 7 que não puderam correr e 5 que correram sem diferenças">
 </picture>
 
+![dsh-site-log-check: execução real de terminal](docs/assets/dsh-site-log-check-demo.gif)
+
+*Repetição animada de uma execução real registrada neste repositório.*
+
+
 ## Instalação em três passos
 
 1. **Instalar** (escolha um canal):
