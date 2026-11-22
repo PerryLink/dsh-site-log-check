@@ -7,6 +7,8 @@
 
 # dsh-site-log-check
 
+Current version `0.3.4`.
+
 **Point every missing day, duplicate log and uncovered on-site supervision record at the exact date, column and cited clause.**
 
 A DeepSeek Harness checker for supervising engineers and chief representatives: hand it a machine-readable export of one project's supervision records, and 14 rules with clause-level citations list the literal differences — no compliance verdict, no liability finding, no change to the original.
