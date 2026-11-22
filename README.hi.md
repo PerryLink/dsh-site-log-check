@@ -11,6 +11,8 @@
 
 पर्यवेक्षण अभियंताओं और प्रमुख प्रतिनिधियों के लिए DeepSeek Harness जाँच प्लगइन: एक परियोजना के पर्यवेक्षण अभिलेख का मशीन-पठनीय निर्यात दीजिए, और धारा-स्तरीय उद्धरण वाले 14 नियम शाब्दिक अंतरों की सूची लौटाते हैं — कोई अनुपालन निर्णय नहीं, कोई दायित्व-निर्धारण नहीं, मूल में कोई बदलाव नहीं।
 
+अंतिम सत्यापन: DeepSeek Harness `dsh-v0.2.3-alpha.1` (2026-11-22).
+
 [इंस्टॉल](#तीन-चरणों-में-शुरुआत) · [कॉन्फ़िगरेशन](#कॉन्फ़िगरेशन) · [FAQ](#faq) · [简体中文](README.md) · [English](README.en.md) · [Español](README.es.md) · [Português](README.pt.md) · [हिन्दी](README.hi.md)
 
 [![License](https://img.shields.io/badge/license-Apache--2.0-3366CC?style=flat-square&labelColor=2B3245)](LICENSE)
@@ -48,7 +50,6 @@ dsh plugin --profile <name> add dsh-site-log-check
 ![dsh-site-log-check का असली टर्मिनल रन](docs/assets/dsh-site-log-check-demo.gif)
 
 *इस रिपॉज़िटरी में दर्ज असली रन का एनिमेटेड रीप्ले।*
-
 
 ## तीन चरणों में शुरुआत
 
